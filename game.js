@@ -78,10 +78,6 @@ async function playSequence(delayms = 0) {
 function addNote() {
   btn = getRandomButton();
   sequence.push(btn);
-
-  for (const btn of sequence) {
-    console.log(btn.el.id);
-  }
 }
 
 function updateScore(score) {
@@ -103,18 +99,18 @@ function getRandomButton() {
 }
 
 function saveScore(score) {
-  let userName = sessionStorage.getItem("userName");
+  let userName = localStorage.getItem("userName");
   if (!userName) {
     userName = "unknown";
   }
   let scores = [];
-  const scoresText = sessionStorage.getItem("scores");
+  const scoresText = localStorage.getItem("scores");
   if (scoresText) {
     scores = JSON.parse(scoresText);
   }
   scores = updateScores(userName, score, scores);
 
-  sessionStorage.setItem("scores", JSON.stringify(scores));
+  localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 function updateScores(userName, score, scores) {
