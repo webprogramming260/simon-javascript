@@ -38,6 +38,7 @@ async function pressButton(button) {
       }
       allowPlayer = true;
     } else {
+      saveScore(sequence.length - 1);
       mistakeSound.play();
       await buttonDance();
     }
@@ -99,6 +100,45 @@ async function buttonDance(laps = 5) {
 function getRandomButton() {
   let btns = Array.from(buttons.values());
   return btns[Math.floor(Math.random() * buttons.size)];
+}
+
+function saveScore(score) {
+  let userName = sessionStorage.getItem("userName");
+  if (!userName) {
+    userName = "unknown";
+  }
+  let scores = [];
+  const scoresText = sessionStorage.getItem("scores");
+  if (scoresText) {
+    scores = JSON.parse(scoresText);
+  }
+  scores = updateScores(userName, score, scores);
+
+  sessionStorage.setItem("scores", JSON.stringify(scores));
+}
+
+function updateScores(userName, score, scores) {
+  const date = new Date().toLocaleDateString();
+  const newScore = { name: userName, score: score, date: date };
+
+  let found = false;
+  for (const [i, prevScore] of scores.entries()) {
+    if (score > prevScore.score) {
+      scores.splice(i, 0, newScore);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    scores.push(newScore);
+  }
+
+  if (scores.length > 10) {
+    scores.length = 10;
+  }
+
+  return scores;
 }
 
 function delay(milliseconds) {

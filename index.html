@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simon</title>
 
+    <script src="login.js"></script>
     <link rel="stylesheet" href="main.css" />
 
     <link
@@ -37,13 +38,13 @@
 
     <main class="container-fluid bg-secondary text-center">
       <div>
-      <h1>Welcome</h1>
-      <p>Login to play</p>
-      <form method="get" action="play.html">
-        <input type="text" id="name" placeholder="Your name here" />
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-    </div>
+        <h1>Welcome</h1>
+        <p>Login to play</p>
+        <div>
+          <input type="text" id="name" placeholder="Your name here" />
+          <button class="btn btn-primary" onclick="login()">Login</button>
+        </div>
+      </div>
     </main>
 
     <footer class="bg-dark text-dark text-muted">
