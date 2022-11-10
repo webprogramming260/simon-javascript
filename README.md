@@ -1,4 +1,4 @@
-# simon-css
+# simon-javascript
 
 This demonstrates the use of basic JavaScript for interactivity.
 
