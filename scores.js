@@ -26,8 +26,6 @@ function loadScores() {
 
     tableBodyEl.appendChild(rowEl);
   }
-
-  console.log(scores);
 }
 
 loadScores();
