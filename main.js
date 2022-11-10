@@ -1,7 +1,11 @@
+const sounds = ["sound1.mp3", "sound2.mp3", "sound3.mp3", "sound4.mp3"];
+const mistakeSound = loadSound("error.mp3");
+
 class Button {
   constructor(soundUrl, el) {
     this.el = el;
-    this.sound = new Audio(soundUrl);
+    this.sound = loadSound(soundUrl);
+
     this.press = async function (delayms = 500, playSound = true) {
       el.style.filter = "brightness(100%)";
       if (playSound) {
@@ -9,34 +13,38 @@ class Button {
       }
       await delay(delayms);
       el.style.filter = "brightness(50%)";
+      await delay(100);
     };
   }
 }
 
-const sounds = [
-  "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
-  "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
-  "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
-  "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3",
-];
-
-const states = {
-  reset: 0,
-  addNote: 1,
-  playSequence: 2,
-  playerPlayback: 3,
-  mistake: 4,
-  win: 5,
-};
-
-let state = states.reset;
+let buttons = new Map();
+let allowPlayer = false;
+let sequence = [];
+let playerPlaybackPos = 0;
 
 async function pressButton(button) {
-  buttons.get(button.id).press();
+  if (allowPlayer) {
+    allowPlayer = false;
+    await buttons.get(button.id).press();
+
+    if (sequence[playerPlaybackPos].el.id === button.id) {
+      playerPlaybackPos++;
+      if (playerPlaybackPos === sequence.length) {
+        playerPlaybackPos = 0;
+        addNote();
+        updateScore(sequence.length - 1);
+        await playSequence(500);
+      }
+      allowPlayer = true;
+    } else {
+      mistakeSound.play();
+      await buttonDance();
+    }
+  }
 }
 
-let buttons = new Map();
-function initializeButtons() {
+function initialize() {
   document.querySelectorAll(".game-button").forEach((el, i) => {
     if (i < sounds.length) {
       buttons.set(el.id, new Button(sounds[i], el));
@@ -44,8 +52,54 @@ function initializeButtons() {
     }
   });
 }
+initialize();
 
-initializeButtons();
+async function reset() {
+  allowPlayer = false;
+  playerPlaybackPos = 0;
+  sequence = [];
+  updateScore("--");
+  await buttonDance(1);
+  addNote();
+  await playSequence(1000);
+  allowPlayer = true;
+}
+
+async function playSequence(delayms = 0) {
+  if (delayms > 0) {
+    await delay(delayms);
+  }
+  for (const btn of sequence) {
+    await btn.press();
+  }
+}
+
+function addNote() {
+  btn = getRandomButton();
+  sequence.push(btn);
+
+  for (const btn of sequence) {
+    console.log(btn.el.id);
+  }
+}
+
+function updateScore(score) {
+  const scoreEl = document.querySelector("#score");
+  scoreEl.textContent = score;
+}
+
+async function buttonDance(laps = 5) {
+  for (let step = 0; step < laps; step++) {
+    for (const btn of buttons.values()) {
+      await btn.press(100, false);
+    }
+  }
+}
+
+function getRandomButton() {
+  let btns = Array.from(buttons.values());
+  return btns[Math.floor(Math.random() * buttons.size)];
+}
 
 function delay(milliseconds) {
   return new Promise((resolve) => {
@@ -53,10 +107,6 @@ function delay(milliseconds) {
   });
 }
 
-async function buttonDance() {
-  for (let step = 0; step < 5; step++) {
-    for (const btn of buttons.values()) {
-      await btn.press(100, false);
-    }
-  }
+function loadSound(filename) {
+  return new Audio("assets/" + filename);
 }
