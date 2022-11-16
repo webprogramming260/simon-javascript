@@ -38,32 +38,34 @@
     <main class="bg-secondary">
       <div class="game">
         <div class="button-container">
-          <!-- buttons are discovered by the JavaScript by selecting the game-button class -->
-          <!-- onclick triggers a buton push interaction -->
+          <!-- buttons are discovered in the JavaScript by selecting the game-button class -->
+          <!-- onclick triggers a button push interaction -->
           <button
             id="green"
             class="game-button button-top-left"
-            onclick="pressButton(this)"
+            onclick="game.pressButton(this)"
           ></button>
           <button
             id="red"
             class="game-button button-top-right"
-            onclick="pressButton(this)"
+            onclick="game.pressButton(this)"
           ></button>
           <button
             id="yellow"
             class="game-button button-bottom-left"
-            onclick="pressButton(this)"
+            onclick="game.pressButton(this)"
           ></button>
           <button
             id="blue"
             class="game-button button-bottom-right"
-            onclick="pressButton(this)"
+            onclick="game.pressButton(this)"
           ></button>
           <div class="controls center">
             <div class="game-name">Simon<sup>&reg;</sup></div>
             <div id="score" class="score center">--</div>
-            <button class="btn btn-primary" onclick="reset()">Reset</button>
+            <button class="btn btn-primary" onclick="game.reset()">
+              Reset
+            </button>
           </div>
         </div>
       </div>
@@ -81,6 +83,6 @@
     </footer>
 
     <!-- Script is located at the bottem because it references HTML elements during initialization -->
-    <script src="game.js"></script>
+    <script src="play.js"></script>
   </body>
 </html>
