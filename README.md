@@ -6,7 +6,7 @@ The addition of JavaScript makes our applicaiton completely functional.
 
 The application has a login (home), game play, high scores, and about page. Each page contains a header that provides navigation between the pages, and a footer that references the source repository.
 
-You can view this application running here: [Example Simon JavaScript](https://github.com/webprogramming260/simon-javascript)
+You can view this application running here: [Example Simon JavaScript](https://webprogramming260.github.io/simon-javascript)
 
 ## Study this code
 
