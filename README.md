@@ -38,4 +38,4 @@ First, get familiar with what this code teaches.
 - 60% - Valid game play
 - 20% - Capture and store username in scores
 - 10% - At least four Git commits for the project (Initial, milestone, ..., milestone, final)
-- 10% - Notes in your GitHub Pages README.md about what you have learned
+- 10% - Notes in your GitHub repository README.md about what you have learned
