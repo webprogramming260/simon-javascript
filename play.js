@@ -3,13 +3,13 @@ class Button {
     this.el = el;
     this.sound = loadSound(soundUrl);
 
-    this.press = async function (delayms = 500, playSound = true) {
-      el.style.filter = "brightness(100%)";
+    this.press = async function (delayMs = 500, playSound = true) {
+      el.style.filter = 'brightness(100%)';
       if (playSound) {
         this.sound.play();
       }
-      await delay(delayms);
-      el.style.filter = "brightness(50%)";
+      await delay(delayMs);
+      el.style.filter = 'brightness(50%)';
       await delay(100);
     };
   }
@@ -27,13 +27,13 @@ class Game {
     this.#allowPlayer = false;
     this.#sequence = [];
     this.#playerPlaybackPos = 0;
-    this.#mistakeSound = loadSound("error.mp3");
+    this.#mistakeSound = loadSound('error.mp3');
 
-    const sounds = ["sound1.mp3", "sound2.mp3", "sound3.mp3", "sound4.mp3"];
-    document.querySelectorAll(".game-button").forEach((el, i) => {
+    const sounds = ['sound1.mp3', 'sound2.mp3', 'sound3.mp3', 'sound4.mp3'];
+    document.querySelectorAll('.game-button').forEach((el, i) => {
       if (i < sounds.length) {
         this.#buttons.set(el.id, new Button(sounds[i], el));
-        el.style.filter = "brightness(50%)";
+        el.style.filter = 'brightness(50%)';
       }
     });
   }
@@ -64,16 +64,16 @@ class Game {
     this.#allowPlayer = false;
     this.#playerPlaybackPos = 0;
     this.#sequence = [];
-    this.#updateScore("--");
+    this.#updateScore('--');
     await this.#buttonDance(1);
     this.#addNote();
     await this.#playSequence(1000);
     this.#allowPlayer = true;
   }
 
-  async #playSequence(delayms = 0) {
-    if (delayms > 0) {
-      await delay(delayms);
+  async #playSequence(delayMs = 0) {
+    if (delayMs > 0) {
+      await delay(delayMs);
     }
     for (const btn of this.#sequence) {
       await btn.press();
@@ -86,7 +86,7 @@ class Game {
   }
 
   #updateScore(score) {
-    const scoreEl = document.querySelector("#score");
+    const scoreEl = document.querySelector('#score');
     scoreEl.textContent = score;
   }
 
@@ -99,23 +99,23 @@ class Game {
   }
 
   #getRandomButton() {
-    let btns = Array.from(this.#buttons.values());
-    return btns[Math.floor(Math.random() * this.#buttons.size)];
+    let buttons = Array.from(this.#buttons.values());
+    return buttons[Math.floor(Math.random() * this.#buttons.size)];
   }
 
   #saveScore(score) {
-    let userName = localStorage.getItem("userName");
+    let userName = localStorage.getItem('userName');
     if (!userName) {
-      userName = "unknown";
+      userName = 'unknown';
     }
     let scores = [];
-    const scoresText = localStorage.getItem("scores");
+    const scoresText = localStorage.getItem('scores');
     if (scoresText) {
       scores = JSON.parse(scoresText);
     }
     scores = this.#updateScores(userName, score, scores);
 
-    localStorage.setItem("scores", JSON.stringify(scores));
+    localStorage.setItem('scores', JSON.stringify(scores));
   }
 
   #updateScores(userName, score, scores) {
@@ -152,5 +152,5 @@ function delay(milliseconds) {
 }
 
 function loadSound(filename) {
-  return new Audio("assets/" + filename);
+  return new Audio('assets/' + filename);
 }
