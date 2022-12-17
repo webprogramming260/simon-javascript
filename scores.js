@@ -1,30 +1,34 @@
 function loadScores() {
-  let scores = [{ name: "Lee", score: 377, date: "1970/02/19" }];
-  const scoresText = localStorage.getItem("scores");
+  let scores = [];
+  const scoresText = localStorage.getItem('scores');
   if (scoresText) {
     scores = JSON.parse(scoresText);
   }
 
-  const tableBodyEl = document.querySelector("#scores");
+  const tableBodyEl = document.querySelector('#scores');
 
-  for (const [i, score] of scores.entries()) {
-    const positionTdEl = document.createElement("td");
-    const nameTdEl = document.createElement("td");
-    const scoreTdEl = document.createElement("td");
-    const dateTdEl = document.createElement("td");
+  if (scores.length) {
+    for (const [i, score] of scores.entries()) {
+      const positionTdEl = document.createElement('td');
+      const nameTdEl = document.createElement('td');
+      const scoreTdEl = document.createElement('td');
+      const dateTdEl = document.createElement('td');
 
-    positionTdEl.textContent = i + 1;
-    nameTdEl.textContent = score.name;
-    scoreTdEl.textContent = score.score;
-    dateTdEl.textContent = score.date;
+      positionTdEl.textContent = i + 1;
+      nameTdEl.textContent = score.name;
+      scoreTdEl.textContent = score.score;
+      dateTdEl.textContent = score.date;
 
-    const rowEl = document.createElement("tr");
-    rowEl.appendChild(positionTdEl);
-    rowEl.appendChild(nameTdEl);
-    rowEl.appendChild(scoreTdEl);
-    rowEl.appendChild(dateTdEl);
+      const rowEl = document.createElement('tr');
+      rowEl.appendChild(positionTdEl);
+      rowEl.appendChild(nameTdEl);
+      rowEl.appendChild(scoreTdEl);
+      rowEl.appendChild(dateTdEl);
 
-    tableBodyEl.appendChild(rowEl);
+      tableBodyEl.appendChild(rowEl);
+    }
+  } else {
+    tableBodyEl.innerHTML = '<tr><td colSpan=4>Be the first to score</td></tr>';
   }
 }
 
