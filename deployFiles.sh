@@ -11,13 +11,13 @@ done
 
 if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
     printf "\nMissing required parameter.\n"
-    printf "  syntax: deploy.sh -k <pem key file> -h <hostname> -s <service>\n\n"
+    printf "  syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
     exit 1
 fi
 
 hostname=$service.$hostname
 
-printf "\n-------------------------------\nDeploying $service to $hostname with $key\n-------------------------------\n"
+printf "\n-------------------------------\nDeploying files for $service to $hostname with $key\n-------------------------------\n"
 
 # Step 1
 printf "\n----> Clear out the previous distribution on the target.\n"
