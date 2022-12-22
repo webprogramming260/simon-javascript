@@ -1,6 +1,6 @@
 # simon-javascript
 
-This implementation of Simon demonstrates the use of basic JavaScript for interactivity. This addition makes the application completely functional. The application has a login (home), game play, high scores, and about page. Each page contains a header that provides navigation between the pages, and a footer that references the source repository.
+This deliverable demonstrates the use of basic JavaScript for interactivity. This addition makes the application completely functional. The application has a login (home), game play, high scores, and about page. Each page contains a header that provides navigation between the pages, and a footer that references the source repository.
 
 You can view this application running here: [Example Simon JavaScript](https://simon-javascript.cs260.click)
 
