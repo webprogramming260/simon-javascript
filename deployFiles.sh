@@ -15,7 +15,7 @@ if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
     exit 1
 fi
 
-printf "----> Deploying files for $service to $hostname with $key\n"
+printf "\n----> Deploying files for $service to $hostname with $key\n"
 
 # Step 1
 printf "\n----> Clear out the previous distribution on the target.\n"
