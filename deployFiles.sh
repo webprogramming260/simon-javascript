@@ -15,29 +15,17 @@ if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
     exit 1
 fi
 
-hostname=$service.$hostname
+hostname=$hostname
 
-printf "\n-------------------------------\nDeploying files for $service to $hostname with $key\n-------------------------------\n"
+printf "----> Deploying files for $service to $hostname with $key\n"
 
 # Step 1
 printf "\n----> Clear out the previous distribution on the target.\n"
 ssh -i $key ubuntu@$hostname << ENDSSH
-rm -rf public_html/${service}
-mkdir -p public_html/${service}
+rm -rf services/${service}/public
+mkdir -p services/${service}/public
 ENDSSH
 
 # Step 2
 printf "\n----> Copy the distribution package to the target.\n"
-scp -r -i $key * ubuntu@$hostname:public_html/$service
-
-# Step 3
-printf "\n----> Deploy the service on the target\n"
-ssh -i $key ubuntu@$hostname << ENDSSH
-if cat /etc/caddy/Caddyfile | grep -q ${hostname}; then
-  printf "\n-------------------------------\nUpdating existing service\n-------------------------------\n"
-else
-  printf "\n-------------------------------\nInstalling new service\n-------------------------------\n"
-  sudo sh -c 'printf "\n\n${hostname} {\n\troot * /usr/share/caddy/${service}\n\tfile_server\n}\n" >> Caddyfile'
-  sudo service caddy restart
-fi
-ENDSSH
+scp -r -i $key * ubuntu@$hostname:services/$service/public
