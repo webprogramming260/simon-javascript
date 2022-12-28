@@ -15,8 +15,6 @@ if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
     exit 1
 fi
 
-hostname=$hostname
-
 printf "----> Deploying files for $service to $hostname with $key\n"
 
 # Step 1
