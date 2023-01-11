@@ -2,7 +2,9 @@
 
 This deliverable demonstrates the use of basic JavaScript for interactivity. This addition makes the application completely functional. The application has a login (home), game play, high scores, and about page. Each page contains a header that provides navigation between the pages, and a footer that references the source repository.
 
-You can view this application running here: [Example Simon JavaScript](https://simon-javascript.cs260.click)
+## Adding JavaScript
+
+The major changes to the application include the introduction of `login.js`, `play.js`, and `scores.js`. When a user enters their login name `login.js` puts that name in the browser's local storage so that it is available the next time they use the application. `play.js` controls all the game interactions and stores the resulting score in the browser's local storage. `scores.js` retrieves the high scores from local storage so that they can be displayed.
 
 ## Study this code
 
