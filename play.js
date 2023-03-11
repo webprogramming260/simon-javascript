@@ -5,6 +5,9 @@ const btnDescriptions = [
   { file: 'sound4.mp3', hue: 240 },
 ];
 
+
+
+
 class Button {
   constructor(description, el) {
     this.el = el;
@@ -57,6 +60,10 @@ class Game {
     const playerNameEl = document.querySelector('.player-name');
     playerNameEl.textContent = this.getPlayerName();
   }
+  /* <div class="players">
+        Player:
+        <span class="player-name"></span>
+      </div> */
 
   async pressButton(button) {
     if (this.allowPlayer) {
@@ -90,6 +97,11 @@ class Game {
     await this.playSequence();
     this.allowPlayer = true;
   }
+
+/* <div class="players">
+        Player:
+        <span class="player-name"></span>
+      </div> */
 
   getPlayerName() {
     return localStorage.getItem('userName') ?? 'Mystery player';
