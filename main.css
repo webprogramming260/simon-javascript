@@ -244,7 +244,16 @@ footer a {
 
 
 
+/* Secret menu stuff  */
 .egg {
   max-width: 30%;
   max-height: 30%;
+  -webkit-transition-property: all; 
+  -webkit-transition-duration: 0.5s; 
+  -webkit-transition-timing-function: ease;
 }
+.egg:hover {
+  max-width: 40%;
+  max-height: 40%;
+}
+/* end Secret menu stuff  */
