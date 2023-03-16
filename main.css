@@ -269,6 +269,19 @@ footer a {
   }
 }
 
+/* for the phone */
+@media (max-width: 500px) {
+  .game-name {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .score center {
+    font-size: 1 em;
+  }
+}
+/* end for the phone */
+
 
 
 /* Secret menu stuff  */
@@ -284,3 +297,6 @@ footer a {
   max-height: 40%;
 }
 /* end Secret menu stuff  */
+
+
+
