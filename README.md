@@ -1,3 +1,6 @@
+I dare you to find the secret menu.
+
+
 Notes
 <!-- buttons are discovered in the JavaScript by selecting the game-button class -->
 <!-- onclick triggers a button push interaction -->
