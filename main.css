@@ -55,8 +55,9 @@ footer a {
   color: rgb(118, 190, 210);
 }
 
+/* effects the center part of the game */
 .game {
-  background: rgb(0, 0, 0);
+  /* background: rgb(0, 0, 0);
   border-radius: 50%;
   box-shadow: 0 0 20px 5px rgb(69, 69, 69);
   width: 80vw;
@@ -65,8 +66,19 @@ footer a {
   min-width: 300px;
   min-height: 300px;
   max-width: min(80vmin, 1000px);
+  max-height: min(80vmin, 1000px); */
+  background: url(EmptyChessBoard.jpg);
+  background-size: 100% 100%;
+  box-shadow: 0 0 20px 5px rgb(69, 69, 69);
+  width: 90vw;
+  height: 90vw;
+  position: absolute;
+  min-width: 350px;
+  min-height: 350px;
+  max-width: min(80vmin, 1000px);
   max-height: min(80vmin, 1000px);
 }
+/* end center effects */
 
 .button-container {
   width: 100%;
