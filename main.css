@@ -246,6 +246,11 @@ footer a {
   background-color: #300;
 }
 
+.score center {
+  float: left;
+
+}
+
 .center {
   top: 50%;
   left: 50%;
