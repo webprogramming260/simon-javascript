@@ -81,9 +81,15 @@ footer a {
 /* end center effects */
 
 .button-container {
+  /* width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; */
   width: 100%;
   height: 100%;
   display: grid;
+  margin: 34px;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
