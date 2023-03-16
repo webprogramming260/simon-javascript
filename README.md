@@ -42,6 +42,11 @@ For more information that I've learned, check out my google document I've been m
 
 
 
+Learned how to more effectively use the span element. Due to it being naturally inline, I can include two buttons,
+or an image with a paragraph to display side by side.
+
+
+
 
 
 
