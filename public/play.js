@@ -76,11 +76,13 @@ class Game {
           this.playerPlaybackPos = 0;
           this.addButton();
           this.updateScore(this.sequence.length - 1);
+          console.log("score should be updated")
           await this.playSequence();
         }
         this.allowPlayer = true;
       } else {
         this.saveScore(this.sequence.length - 1);
+        console.log("saving score")
         this.mistakeSound.play();
         await this.buttonDance(2);
       }
@@ -138,16 +140,36 @@ class Game {
     return buttons[Math.floor(Math.random() * this.buttons.size)];
   }
 
-  saveScore(score) {
-    const userName = this.getPlayerName();
-    let scores = [];
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-      scores = JSON.parse(scoresText);
-    }
-    scores = this.updateScores(userName, score, scores);
+  // saveScore(score) {
+  //   const userName = this.getPlayerName();
+  //   let scores = [];
+  //   const scoresText = localStorage.getItem('scores');
+  //   if (scoresText) {
+  //     scores = JSON.parse(scoresText);
+  //   }
+  //   scores = this.updateScores(userName, score, scores);
 
-    localStorage.setItem('scores', JSON.stringify(scores));
+  //   localStorage.setItem('scores', JSON.stringify(scores));
+  // }
+  async saveScore(score) {
+    const userName = this.getPlayerName();
+    const date = new Date().toLocaleDateString();
+    const newScore = { name: userName, score: score, date: date };
+
+    try {
+      const response = await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newScore),
+      });
+
+      // Store what the service gave us as the high scores
+      const scores = await response.json();
+      localStorage.setItem('scores', JSON.stringify(scores));
+    } catch {
+      // If there was an error then just track scores locally
+      this.updateScoresLocal(newScore);
+    }
   }
 
   updateScores(userName, score, scores) {
