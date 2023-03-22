@@ -53,8 +53,10 @@ function updateScores(newScore, scores) {
     scores.push(newScore);
   }
 
+  //this allows you to limit how many scores are displayed
+  //i.e. top 10, top 15, etc.
   if (scores.length > 10) {
-    scores.length = 10;
+    scores.length = 15;
   }
 
   return scores;
