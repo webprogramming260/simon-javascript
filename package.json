@@ -1,0 +1,23 @@
+{
+  "name": "simon-javascript",
+  "version": "1.0.0",
+  "description": "I dare you to find the secret menu.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JadenTaylor7/simon-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JadenTaylor7/simon-javascript/issues"
+  },
+  "homepage": "https://github.com/JadenTaylor7/simon-javascript#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
