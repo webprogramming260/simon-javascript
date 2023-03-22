@@ -50,9 +50,20 @@ or an image with a paragraph to display side by side.
 
 
 
+Simon Service stuff ----------------------------
+Check out index.js line 5. the port 3000 is important. For the startup assignment, change this to port 4000.
+(should say const port = process.argv.length > 2 ? process.argv[2] : 3000;)
 
 
 
+On index.js:
+
+app.use(express.static('public'));
+//by using the word public, we are accessing the public folder
+
+
+To ignore modules or files we don't want, create .gitignore and add them there. Example:
+node_modules
 
 
 
