@@ -1,19 +1,19 @@
 const express = require('express');
 const app = express();
 
-// The service port. In production the front-end code is statically hosted by the service on the same port.
+// The service port. In production the application is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
-//this part is important. to do startup, do 4000 instead.
+//this part is important. For the startup, do port 4000 instead.
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
-// Serve up the front-end static content hosting
+// Serve up the application's static content
 app.use(express.static('public'));
-//this will look for the public folder and access stuff there
+//this tells it to access the public folder
 
 // Router for service endpoints
-const apiRouter = express.Router();
+var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetScores
@@ -35,3 +35,27 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+// updateScores considers a new score for inclusion in the high scores.
+// The high scores are saved in memory and disappear whenever the service is restarted.
+let scores = [];
+function updateScores(newScore, scores) {
+  let found = false;
+  for (const [i, prevScore] of scores.entries()) {
+    if (newScore.score > prevScore.score) {
+      scores.splice(i, 0, newScore);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    scores.push(newScore);
+  }
+
+  if (scores.length > 10) {
+    scores.length = 10;
+  }
+
+  return scores;
+}
