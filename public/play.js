@@ -5,9 +5,6 @@ const btnDescriptions = [
   { file: 'sound4.mp3', hue: 240 },
 ];
 
-
-
-
 class Button {
   constructor(description, el) {
     this.el = el;
@@ -60,10 +57,6 @@ class Game {
     const playerNameEl = document.querySelector('.player-name');
     playerNameEl.textContent = this.getPlayerName();
   }
-  /* <div class="players">
-        Player:
-        <span class="player-name"></span>
-      </div> */
 
   async pressButton(button) {
     if (this.allowPlayer) {
@@ -76,13 +69,11 @@ class Game {
           this.playerPlaybackPos = 0;
           this.addButton();
           this.updateScore(this.sequence.length - 1);
-          console.log("score should be updated")
           await this.playSequence();
         }
         this.allowPlayer = true;
       } else {
         this.saveScore(this.sequence.length - 1);
-        console.log("saving score")
         this.mistakeSound.play();
         await this.buttonDance(2);
       }
@@ -99,11 +90,6 @@ class Game {
     await this.playSequence();
     this.allowPlayer = true;
   }
-
-/* <div class="players">
-        Player:
-        <span class="player-name"></span>
-      </div> */
 
   getPlayerName() {
     return localStorage.getItem('userName') ?? 'Mystery player';
@@ -140,17 +126,6 @@ class Game {
     return buttons[Math.floor(Math.random() * this.buttons.size)];
   }
 
-  // saveScore(score) {
-  //   const userName = this.getPlayerName();
-  //   let scores = [];
-  //   const scoresText = localStorage.getItem('scores');
-  //   if (scoresText) {
-  //     scores = JSON.parse(scoresText);
-  //   }
-  //   scores = this.updateScores(userName, score, scores);
-
-  //   localStorage.setItem('scores', JSON.stringify(scores));
-  // }
   async saveScore(score) {
     const userName = this.getPlayerName();
     const date = new Date().toLocaleDateString();
@@ -172,13 +147,16 @@ class Game {
     }
   }
 
-  updateScores(userName, score, scores) {
-    const date = new Date().toLocaleDateString();
-    const newScore = { name: userName, score: score, date: date };
+  updateScoresLocal(newScore) {
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+      scores = JSON.parse(scoresText);
+    }
 
     let found = false;
     for (const [i, prevScore] of scores.entries()) {
-      if (score > prevScore.score) {
+      if (newScore > prevScore.score) {
         scores.splice(i, 0, newScore);
         found = true;
         break;
@@ -193,7 +171,7 @@ class Game {
       scores.length = 10;
     }
 
-    return scores;
+    localStorage.setItem('scores', JSON.stringify(scores));
   }
 }
 
@@ -201,9 +179,7 @@ const game = new Game();
 
 function delay(milliseconds) {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, milliseconds);
+    setTimeout(resolve, milliseconds);
   });
 }
 
