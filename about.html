@@ -7,7 +7,9 @@
     <link rel="icon" href="favicon.ico" />
 
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="about.css" />
 
+    <!-- Include bootstrap CSS framework -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -38,29 +40,29 @@
 
     <main class="container-fluid bg-secondary text-center">
       <div>
+        <div id="picture" class="picture-box"><img src="assets/placeholder.jpg" alt="random" /></div>
+
         <p>
-          Simon is a repetitive memory game where you follow the demonstrated
-          color sequence until you make a mistake. The longer the sequence you
-          repeat, the greater your score.
+          Simon is a repetitive memory game where you follow the demonstrated color sequence until you make a mistake.
+          The longer the sequence you repeat, the greater your score.
         </p>
 
         <p>
-          The name Simon is a registered trademark owned by Milton-Bradley. Our
-          use of the name and the game is for non-profit educational use only.
-          No part of this code or program should be used outside of that
-          definition.
+          The name Simon is a registered trademark of Milton-Bradley. Our use of the name and the game is for non-profit
+          educational use only. No part of this code or program should be used outside of that definition.
         </p>
+
+        <div id="quote" class="quote-box bg-light text-dark">
+          <p class="quote">Words are cheap. Show me the code.</p>
+          <p class="author">Linus Torvalds</p>
+        </div>
       </div>
     </main>
 
     <footer class="bg-dark text-dark text-muted">
       <div class="container-fluid">
         <span class="text-reset">Author Name(s)</span>
-        <a
-          class="text-reset"
-          href="https://github.com/webprogramming260/simon-javascript"
-          >Source</a
-        >
+        <a class="text-reset" href="https://github.com/webprogramming260/simon-css">Source</a>
       </div>
     </footer>
   </body>
