@@ -1,8 +1,8 @@
 const btnDescriptions = [
-  {file: 'sound1.mp3', hue: 120},
-  {file: 'sound2.mp3', hue: 0},
-  {file: 'sound3.mp3', hue: 60},
-  {file: 'sound4.mp3', hue: 240},
+  { file: 'sound1.mp3', hue: 120 },
+  { file: 'sound2.mp3', hue: 0 },
+  { file: 'sound3.mp3', hue: 60 },
+  { file: 'sound4.mp3', hue: 240 },
 ];
 
 class Button {
@@ -18,17 +18,19 @@ class Button {
     this.el.style.backgroundColor = background;
   }
 
-  async press(volume) {
-    this.paint(50);
-    await this.play(volume);
-    this.paint(25);
+  async press(volume = 1.0) {
+    return new Promise(async (pressResolve) => {
+      this.paint(50);
+      await this.playSound(volume);
+      this.paint(25);
+      pressResolve();
+    });
   }
 
-  // Work around Safari's rule to only play sounds if given permission.
-  async play(volume = 1.0) {
-    this.sound.volume = volume;
-    await new Promise((resolve) => {
-      this.sound.onended = resolve;
+  async playSound(volume) {
+    return new Promise((playResolve) => {
+      this.sound.volume = volume;
+      this.sound.onended = playResolve;
       this.sound.play();
     });
   }
@@ -140,7 +142,7 @@ class Game {
 
   updateScores(userName, score, scores) {
     const date = new Date().toLocaleDateString();
-    const newScore = {name: userName, score: score, date: date};
+    const newScore = { name: userName, score: score, date: date };
 
     let found = false;
     for (const [i, prevScore] of scores.entries()) {
