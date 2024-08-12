@@ -1,7 +1,8 @@
-body {
+.body {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  min-width: 375px;
+  height: 100vh;
 }
 
 header {
@@ -9,7 +10,7 @@ header {
 }
 
 main {
-  flex: 1 calc(100vh - 110px);
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,14 +42,11 @@ footer a {
   float: right;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 600px) {
   header {
     display: none;
   }
   footer {
     display: none;
-  }
-  main {
-    flex: 1 100vh;
   }
 }

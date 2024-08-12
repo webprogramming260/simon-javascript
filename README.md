@@ -1,3 +1,3 @@
-# simon-javascript
+# simon-react
 
-This deliverable demonstrates the use of basic JavaScript for interactivity.
+This deliverable demonstrates introduces the [React](https://react.dev) web framework and [Vite](https://vitejs.dev/) for frontend tooling.
