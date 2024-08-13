@@ -7,8 +7,6 @@ function displayControls() {
 function login(e) {
   const nameEl = document.querySelector('#name');
   localStorage.setItem('userName', nameEl.value);
-  displayControls();
-  e.preventDefault();
 }
 
 function logout(e) {
